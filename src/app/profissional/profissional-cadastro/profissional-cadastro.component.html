@@ -100,6 +100,28 @@
         </div>
       </div>
 
+      <div class="ui-g-12 ui-md-12 ui-fluid">
+        <label>Endereço</label>
+        <input
+          pInputText
+          type="text"
+          name="endereco"
+          [(ngModel)]="livro.endereco"
+          #endereco="ngModel"
+          minlength="1"
+        />
+
+        <div>
+          <app-message
+            [control]="endereco"
+            error="minlength"
+            text="Mínimo de {{
+              endereco.errors?.minlength?.requiredLength
+            }} caracteres"
+          ></app-message>
+        </div>
+      </div>
+
       <div class="ui-g-12">
         <button
           pButton

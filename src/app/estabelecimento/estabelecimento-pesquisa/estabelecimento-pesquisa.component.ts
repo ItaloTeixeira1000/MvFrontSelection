@@ -20,7 +20,7 @@ export class EstabelecimentoPesquisaComponent implements OnInit {
   estabelecimentos = [];
 
   constructor(
-    private fornecedorService: EstabelecimentoService,
+    private estabelecimentoService: EstabelecimentoService,
     private toastr: ToastrService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService
@@ -32,7 +32,7 @@ export class EstabelecimentoPesquisaComponent implements OnInit {
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
 
-    this.fornecedorService
+    this.estabelecimentoService
       .pesquisar(this.filtro)
       .then((resultado) => {
         this.totalRegistros = resultado.total;
@@ -51,7 +51,7 @@ export class EstabelecimentoPesquisaComponent implements OnInit {
   }
 
   excluir(estabelecimento: any) {
-    this.fornecedorService
+    this.estabelecimentoService
       .excluir(estabelecimento.codigo)
       .then(() => {
         this.grid.first = 0;
@@ -67,7 +67,7 @@ export class EstabelecimentoPesquisaComponent implements OnInit {
   }
 
   mudarStatus(codigo: number, status: boolean) {
-    this.fornecedorService
+    this.estabelecimentoService
       .mudarStatus(codigo, !status)
       .then(() => {
         this.grid.first = 0;

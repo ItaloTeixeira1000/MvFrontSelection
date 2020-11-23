@@ -20,7 +20,7 @@ export class EstabelecimentoCadastroComponent implements OnInit {
   fornecedor = new Estabelecimento();
 
   constructor(
-    private fornecedorService: EstabelecimentoService,
+    private estabelecimentoService: EstabelecimentoService,
     private toasty: ToastrService,
     private handleService: ErrorHandlerService,
     private route: ActivatedRoute,
@@ -46,7 +46,7 @@ export class EstabelecimentoCadastroComponent implements OnInit {
   }
 
   carregarFornecedor(codigo: number) {
-    this.fornecedorService.buscarPorCodigo(codigo)
+    this.estabelecimentoService.buscarPorCodigo(codigo)
       .then(fornecedor => {
         this.fornecedor = fornecedor;
       })
@@ -63,7 +63,7 @@ export class EstabelecimentoCadastroComponent implements OnInit {
 
 
   adicionarFornecedor(form: NgForm) {
-    this.fornecedorService.adicionar(this.fornecedor)
+    this.estabelecimentoService.adicionar(this.fornecedor)
       .then((fornecedorAdicionado) => {
         this.toasty.success('Estabelecimento adicionado com sucesso');
 
@@ -76,7 +76,7 @@ export class EstabelecimentoCadastroComponent implements OnInit {
   }
 
   atualizarFornecedor(form: NgForm) {
-    this.fornecedorService.atualizar(this.fornecedor)
+    this.estabelecimentoService.atualizar(this.fornecedor)
       .then(fornecedor => {
         this.fornecedor = fornecedor;
 

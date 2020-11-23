@@ -13,6 +13,7 @@ export class Profissional {
   telefoneCelular: string;
   telefoneResidencial: string;
   funcao: string;
+  endereco: string;
 }
 
 export class Ocupacao {

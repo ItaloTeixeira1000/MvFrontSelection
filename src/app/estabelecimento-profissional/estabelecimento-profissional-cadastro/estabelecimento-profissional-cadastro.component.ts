@@ -1,7 +1,7 @@
 import { EstabelecimentoService } from './../../estabelecimento/estabelecimento.service';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Ocupacao } from 'src/app/core/model';
+import { Ocupacao, Profissional } from 'src/app/core/model';
 import { EstabelecimentoProfissionalService } from '../estabelecimento-profissional.service';
 import { ProfissionalService } from 'src/app/profissional/profissional.service';
 import { ToastrService } from 'ngx-toastr';
@@ -17,6 +17,7 @@ export class EstabelecimentoProfissionalCadastroComponent implements OnInit {
   ocupacao = new Ocupacao();
   estabelecimentos = [];
   profissionais = [];
+  profissional = new Profissional();
 
   constructor(
     private estabelecimentoService: EstabelecimentoService,
@@ -33,15 +34,8 @@ export class EstabelecimentoProfissionalCadastroComponent implements OnInit {
   salvar(form: NgForm) {
     this.estabelecimentoService.buscarPorCodigo(this.ocupacao.codigoEstabelecimento)
       .then((response) => {
-        response.profissionais.push(
-          {
-            codigo: this.ocupacao.codigoProfissional,
-            nome: '',
-            telefoneCelular: '',
-            telefoneResidencial: '',
-            funcao: ''
-          }
-        );
+        this.profissional.codigo = this.ocupacao.codigoProfissional;
+        response.profissionais.push(this.profissional);
 
         this.estabelecimentoService.atualizar(response)
           .then(() => {

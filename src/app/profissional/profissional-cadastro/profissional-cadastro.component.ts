@@ -20,8 +20,7 @@ export class ProfissionalCadastroComponent implements OnInit {
   livro = new Profissional();
 
   constructor(
-    private fornecedorService: EstabelecimentoService,
-    private livroService: ProfissionalService,
+    private profissionalService: ProfissionalService,
     private toasty: ToastrService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
@@ -45,7 +44,7 @@ export class ProfissionalCadastroComponent implements OnInit {
   }
 
   carregarLivro(codigo: number) {
-    this.livroService
+    this.profissionalService
       .buscarPorCodigo(codigo)
       .then((livro) => {
         this.livro = livro;
@@ -63,7 +62,7 @@ export class ProfissionalCadastroComponent implements OnInit {
   }
 
   adicionarLivro(form: NgForm) {
-    this.livroService
+    this.profissionalService
       .adicionar(this.livro)
       .then((livroAdicionado) => {
         this.toasty.success('Profissional adicionado com sucesso');
@@ -76,7 +75,7 @@ export class ProfissionalCadastroComponent implements OnInit {
   }
 
   atualizarLivro(form: NgForm) {
-    this.livroService
+    this.profissionalService
       .atualizar(this.livro)
       .then((livro) => {
         this.livro = livro;
