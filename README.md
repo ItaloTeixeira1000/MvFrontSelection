@@ -1,5 +1,7 @@
 # LojaDeLivrosUi
 
+Project for MV selection. Implemented with angular 9.1.0, using oauth 2 with JWT and refresh token on secure cookie, auth guards, http interceptors and user access levels.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
 ## Development server
