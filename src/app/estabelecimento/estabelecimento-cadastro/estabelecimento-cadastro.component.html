@@ -1,0 +1,79 @@
+<div class="container">
+  <form autocomplete="off" #formFornecedor="ngForm" (ngSubmit)="salvar(formFornecedor)">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo'  }} Estabelecimento</h1>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Nome</label>
+        <input
+          pInputText
+          required
+          minlength="1"
+          type="text"
+          name="nome"
+          [(ngModel)]="fornecedor.nome"
+          #nome="ngModel"
+          required
+        />
+
+        <div>
+          <app-message
+            [control]="nome"
+            error="required"
+            text="Informe um nome"
+          ></app-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Telefone</label>
+        <input
+          pInputText
+          minlength="3"
+          type="text"
+          name="telefone"
+          [(ngModel)]="fornecedor.telefone"
+          #telefone="ngModel"
+          minlength="3"
+        />
+
+        <app-message
+            [control]="telefone"
+            error="minlength"
+            text="Mínimo de {{
+              telefone.errors?.minlength?.requiredLength
+            }} caracteres"
+          ></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-12 ui-fluid">
+        <label>Endereço</label>
+        <input
+          pInputText
+          type="text"
+          name="endereco"
+          [(ngModel)]="fornecedor.endereco"
+        />
+      </div>
+
+      <div class="ui-g-12">
+        <button
+          pButton
+          [disabled]="!formFornecedor.valid"
+          type="submit"
+          label="Salvar"
+        ></button>
+        <button
+          pButton
+          type="button"
+          label="Novo"
+          class="ui-button-info"
+          (click)="novo(formFornecedor)"
+        ></button>
+        <a routerLinkActive routerLink="/estabelecimento">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>

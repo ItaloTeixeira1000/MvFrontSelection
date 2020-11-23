@@ -1,0 +1,59 @@
+<div class="container">
+  <form autocomplete="off" #formFornecedor="ngForm" (ngSubmit)="salvar(formFornecedor)">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Nova Ocupação</h1>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Profissional</label>
+        <p-dropdown
+          [options]="profissionais"
+          name="profissionais"
+          required
+          placeholder="Selecione um profissional"
+          [filter]="true"
+          #profissional="ngModel"
+          [(ngModel)]="ocupacao.codigoProfissional"
+        ></p-dropdown>
+
+        <div>
+          <app-message
+            [control]="profissional"
+            error="required"
+            text="Informe um profissional"
+          ></app-message>
+        </div>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Estabelecimento</label>
+        <p-dropdown
+          [options]="estabelecimentos"
+          name="estabelecimentos"
+          required
+          placeholder="Selecione um estabelecimento"
+          [filter]="true"
+          #estabelecimento="ngModel"
+          [(ngModel)]="ocupacao.codigoEstabelecimento"
+        ></p-dropdown>
+
+        <app-message
+            [control]="estabelecimento"
+            error="required"
+            text="Informe um estabelecimento"
+          ></app-message>
+      </div>
+
+      <div class="ui-g-12">
+        <button
+          pButton
+          [disabled]="!formFornecedor.valid"
+          type="submit"
+          label="Salvar"
+        ></button>
+        <a routerLinkActive routerLink="/estabelecimento-profissional">Voltar para a pesquisa</a>
+      </div>
+    </div>
+  </form>
+</div>

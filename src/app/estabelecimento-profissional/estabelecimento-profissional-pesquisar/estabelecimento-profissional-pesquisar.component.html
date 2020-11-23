@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Ocupação</h1>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="estabelecimentosProfissionais" [paginator]="true" [rows]="filtro.itensPorPagina" [lazy]="true" #tabela
+        [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" [responsive]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Estabelecimento</th>
+            <th>Profissional</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-estabelecimento>
+          <tr>
+            <td>{{ estabelecimento.codigo_estabelecimento }}</td>
+            <td>{{ estabelecimento.codigo_profissional }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <a pButton label="Nova Ocupação" routerLinkActive routerLink="/estabelecimento-profissional/novo"></a>
+    </div>
+  </div>
+</div>

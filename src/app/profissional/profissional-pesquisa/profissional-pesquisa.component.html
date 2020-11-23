@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="ui-g">
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
+      <div class="ui-g-12">
+        <h1>Profissionais</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input
+          pInputText
+          type="text"
+          name="descricao"
+          [(ngModel)]="filtro.nome"
+        />
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+    </form>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table
+        [value]="lancamentos"
+        [paginator]="true"
+        [rows]="filtro.itensPorPagina"
+        [lazy]="true"
+        [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        [responsive]="true"
+        emptyMessage="Nenhum livro encontrado"
+        #tabela
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Código</th>
+            <th>Título</th>
+            <th>Celular</th>
+            <th class="col-data">Residencial</th>
+            <th class="col-data">Função</th>
+            <th class="col-acoes"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-lancamento>
+          <tr>
+            <td>{{ lancamento.codigo }}</td>
+            <td>{{ lancamento.nome }}</td>
+            <td>{{ lancamento.telefoneCelular }}</td>
+            <td>{{ lancamento.telefoneResidencial}}</td>
+            <td class="col-valor">{{ lancamento.funcao }}</td>
+
+            <td>
+              <button
+                pButton
+                style="height: 20px;"
+                pTooltip="Editar"
+                tooltipPosition="top"
+                [routerLink]="['/profissional', lancamento.codigo ]"
+                [disabled]="!auth.temPermissao('ROLE_CHANGE')"
+                ><i class="pi pi-pencil"></i
+              ></button>
+              <button
+                pButton
+                style="height: 20px;"
+                pTooltip="Excluir"
+                tooltipPosition="top"
+                (click)="confirmarExlusao(lancamento)"
+                [disabled]="!auth.temPermissao('ROLE_CHANGE')"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="ui-g-12">
+    <a
+      pButton
+      routerLinkActive
+      routerLink="/profissional/novo"
+      label="Novo Profissional"
+    ></a>
+  </div>
+</div>
